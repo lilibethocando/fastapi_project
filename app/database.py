@@ -23,8 +23,8 @@ def get_db():
         db.close()
 
 
-#Currently, we are not using this below because we are using sqlalchemy instead,
-#so we are keeping this here for reference purposes.
+# # Currently, we are not using this below because we are using sqlalchemy instead,
+# # so we are keeping this here for reference purposes.
 # while True:
 #     try:
 #         conn = psycopg2.connect(host='localhost', database='fastapi', user='postgres', password="", cursor_factory=RealDictCursor)
