@@ -77,7 +77,16 @@ jobs:
           heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
           heroku_email: ${{ secrets.HEROKU_EMAIL }}
 
-
+      - name: deploy to Ubuntu server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.UBUNTU_HOST }}
+          username: ${{ secrets.UBUNTU_USERNAME }}
+          password: ${{ secrets.UBUNTU_PASSWORD }}
+          script: |
+            cd app/src
+            git pull
+            sudo systemctl restart api
 
       
       

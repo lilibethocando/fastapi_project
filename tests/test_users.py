@@ -7,7 +7,7 @@ from app.config import settings
 def test_root(client):
     res = client.get("/")
     print(res.json().get('message'))
-    assert res.json().get('message') == 'Welcome to my app where I developed my first APIs with FastAPI! Successfully deployed from CI/CD pipeline.'
+    assert res.json().get('message') == 'Welcome to my app where I developed my first APIs with FastAPI! Pushing out to ubuntu!.'
     assert res.status_code == 200
 
 def test_create_user(client):
