@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My FastAPI project</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-image: url("/static/background_image.jpg"); 
+            background-size: cover;
+            background-position: center center; /* Center the background image horizontally and vertically */
+            background-attachment: fixed; /* Fixed background to cover entire page */
+            background-repeat: no-repeat;
+            margin: 0; /* Remove default margin to align everything properly */
+            padding: 0; /* Remove default padding */
+            min-height: 100vh; /* Ensure the body covers the viewport's height */
+            display: flex; /* Use flexbox to vertically align content */
+            flex-direction: column; /* Stack elements vertically */
+            /* justify-content: space-between; */
+        }
+        .container {
+            flex-grow: 1; /* Expand to fill available space */
+            display: flex; /* Use flexbox to center content vertically */
+            flex-direction: column; /* Stack elements vertically */
+            justify-content: flex-start; /* Align content to the top */
+        }
+        .page-header-container {
+            background-color: rgba(0, 0, 0, 0.5); /* Add a semi-transparent background for the h1 sentence */
+            color: white; /* Text color for the h1 sentence */
+            text-align: center; /* Center content horizontally */
+        }
+        .page-header {
+            /* Add styles for your <h1> element */
+        }
+        footer {
+            background-color: rgba(0, 0, 0, 0.5); /* Add a semi-transparent background for the footer */
+            color: white; /* Text color for the footer */
+            text-align: center;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="page-header-container">Welcome to the FastAPI Social App</h1>
+        {% block content%}
+        <div class="row">
+            <form action=""></form>
+        </div>
+
+        {% endblock content%}
+    </div>
+    <footer>
+            <p>Copyright {{current_year}}. Built by Lilibeth Ocando</p>
+    </footer>
+
+</body>
+</html>
