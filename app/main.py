@@ -5,6 +5,7 @@ from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 import datetime
+import os
 from . import models
 from .database import engine
 from .routers import post, user, auth, vote
@@ -13,7 +14,8 @@ from .config import settings
 #models.Base.metadata.create_all(bind=engine) -- we commented this one after installing alembic.
 
 app = FastAPI(debug=True)
-app.mount("/static", StaticFiles(directory="/Users/default-admin/Desktop/fast_api/fastapi/app/static"), name="static")
+STATIC_DIR = os.path.join(os.path.dirname(__file__), "static")
+app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 origins = ["*"]
 
