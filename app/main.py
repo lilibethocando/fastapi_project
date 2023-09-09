@@ -32,7 +32,8 @@ app.include_router(user.router)
 app.include_router(auth.router)
 app.include_router(vote.router)
 
-templates = Jinja2Templates(directory="/Users/default-admin/Desktop/fast_api/fastapi/app/templates")
+TEMPLATES_DIR = os.path.join(os.path.dirname(__file__), "templates")
+templates = Jinja2Templates(directory=TEMPLATES_DIR)
 
 @app.get("/", response_class=HTMLResponse)
 async def root(request: Request):
