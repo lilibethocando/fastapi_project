@@ -39,6 +39,14 @@
             text-align: center;
             padding: 10px;
         }
+        /* Big letters and bold color for the link */
+        a {
+            background-color: white;
+            font-size: 40px; /* Adjust the font size as needed */
+            font-weight: bold;
+            color: hwb(199 2% 71%); /* Use the color of your choice */
+            text-decoration: none; /* Remove underlines */
+        }
     </style>
 </head>
 <body>
@@ -50,6 +58,8 @@
         </div>
 
         {% endblock content%}
+        <!-- Add a link to the FastAPI documentation -->
+        <a href="https://fastapi-lilibeth.herokuapp.com/docs" target="_blank">Explore the APIs documentation & start executing them here</a>
     </div>
     <footer>
             <p>Copyright {{current_year}}. Built by Lilibeth Ocando</p>
