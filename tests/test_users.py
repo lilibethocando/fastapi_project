@@ -2,13 +2,19 @@ import pytest
 from app import schemas  
 from jose import jwt, JWTError
 from app.config import settings
+from fastapi.testclient import TestClient  # Import for client
+from bs4 import BeautifulSoup  # Import for HTML parsing
 
     
 def test_root(client):
-    res = client.get("/")
-    print(res.json().get('message'))
-    assert res.json().get('message') == 'Welcome to my app where I developed my first APIs with FastAPI! Pushing out to ubuntu!.'
-    assert res.status_code == 200
+    response = client.get("/")
+    assert response.status_code == 200
+    assert response.headers["Content-Type"] == "text/html"
+
+    # Parse HTML content and assert for expected elements
+    soup = BeautifulSoup(response.text, "html.parser")
+    title_element = soup.find("title")
+    assert title_element.text == "Welcome to my app!"  # Adjust for your actual title
 
 def test_create_user(client):
     res = client.post("/users/", json={"email":"miguel@gmail.com", "password":"123456"})
