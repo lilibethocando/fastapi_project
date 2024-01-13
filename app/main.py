@@ -6,7 +6,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 import datetime
 import os
-from app import models
+#from app import models
 from .database import engine
 from .routers import post, user, auth, vote
 from .config import settings
