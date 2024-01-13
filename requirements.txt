@@ -46,4 +46,4 @@ watchgod==0.7
 websockets==10.2
 zipp==3.7.0
 cython
-pydantic-settings==2.1.0
+pydantic-settings
