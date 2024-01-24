@@ -1,5 +1,6 @@
 import email
 from importlib.resources import contents
+from pydantic_settings import BaseSettings, SettingsConfigDict
 from pydantic import BaseModel, EmailStr
 from typing import Optional
 from datetime import datetime

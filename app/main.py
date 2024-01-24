@@ -7,11 +7,12 @@ from fastapi.middleware.cors import CORSMiddleware
 import datetime
 import os
 from . import models
+from pydantic_settings import BaseSettings, SettingsConfigDict
 from .database import engine
 from .routers import post, user, auth, vote
 from .config import settings
 
-models.Base.metadata.create_all(bind=engine) #-- we commented this one after installing alembic.
+#models.Base.metadata.create_all(bind=engine) #-- we commented this one after installing alembic.
 
 app = FastAPI(debug=True)
 STATIC_DIR = os.path.join(os.path.dirname(__file__), "static")
