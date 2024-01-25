@@ -1,10 +1,12 @@
 import email
 from importlib.resources import contents
 from pydantic_settings import BaseSettings, SettingsConfigDict
-from pydantic import BaseModel, EmailStr
 from typing import Optional
 from datetime import datetime
-from pydantic.types import conint
+from typing import List
+from pydantic.v1 import BaseModel, EmailStr, ValidationError, conint
+
+
 
 
 class PostBase(BaseModel):
