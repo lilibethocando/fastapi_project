@@ -1,5 +1,3 @@
-from pyexpat import model
-from statistics import mode
 from fastapi import Body, FastAPI, Query, Response, responses, status, HTTPException, Depends, APIRouter
 from sqlalchemy.orm import Session
 from .. import schemas, database, models, oauth2

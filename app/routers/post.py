@@ -1,9 +1,9 @@
 from fastapi import Body, FastAPI, Query, Response, responses, status, HTTPException, Depends, APIRouter
-from . . import models, schemas, oauth2
+from .. import models, schemas, oauth2
 from sqlalchemy.orm import Session
 from sqlalchemy import func
 from typing import List, Optional
-from . .database import get_db
+from ..database import get_db
 
 
 router = APIRouter(
@@ -26,7 +26,7 @@ def get_posts(db: Session = Depends(get_db), limit: int = 10, skip: int = 0, sea
     return posts
 
 @router.post("/", status_code=status.HTTP_201_CREATED, response_model=schemas.Post)
-def create_posts(post :schemas.PostCreate, db: Session = Depends(get_db), current_user: int = Depends(oauth2.get_current_user)):
+def create_posts(post: schemas.PostCreate, db: Session = Depends(get_db), current_user=Depends(oauth2.get_current_user)):
     # cursor.execute(""" INSERT INTO posts (title, content, published) VALUES (%s, %s, %s) RETURNING * """,
     # (post.title, post.content, post.published))
     # new_post = cursor.fetchone()
@@ -39,30 +39,30 @@ def create_posts(post :schemas.PostCreate, db: Session = Depends(get_db), curren
     return new_post
 
 @router.get("/{id}", response_model=schemas.PostOut)
-def get_post(id: int, db: Session = Depends(get_db)):
+def get_post(get_post_id: int, db: Session = Depends(get_db)):
     # cursor.execute("""SELECT * FROM posts WHERE id = %s """, (str(id)))
     # post = cursor.fetchone()
     # post = db.query(models.Post).filter(models.Post.id==id).first()
 
     post = db.query(models.Post, func.count(models.Vote.post_id).label("votes") ).join(models.Vote, models.Vote.post_id == models.Post.id, isouter=True).group_by(
-        models.Post.id).filter(models.Post.id==id).first()
+        models.Post.id).filter(models.Post.id == get_post_id).first()
     
     if not post:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, 
-                            detail=f"Post with {id} was not found")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail=f"Post with {get_post_id} was not found")
     return post
 
 @router.delete("/{id}", status_code=status.HTTP_204_NO_CONTENT)
-def delete_post(id: int, db: Session = Depends(get_db), current_user: int = Depends(oauth2.get_current_user)):
+def delete_post(delete_post_id: int, db: Session = Depends(get_db), current_user: int = Depends(oauth2.get_current_user)):
     # cursor.execute("""DELETE FROM posts WHERE id = %s RETURNING * """, (str(id)))
     # deleted_post = cursor.fetchone()
     # conn.commit()
-    post_query = db.query(models.Post).filter(models.Post.id==id)
+    post_query = db.query(models.Post).filter(models.Post.id == delete_post_id)
 
     post = post_query.first()
 
     if post == None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Post with {id} does not exist")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Post with {delete_post_id} does not exist")
 
     if post.user_id != current_user.id:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not authorized to perform this action")

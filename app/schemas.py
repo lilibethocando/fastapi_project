@@ -1,18 +1,17 @@
-import email
-from importlib.resources import contents
-from pydantic_settings import BaseSettings, SettingsConfigDict
 from typing import Optional
 from datetime import datetime
-from typing import List
-from pydantic.v1 import BaseModel, EmailStr, ValidationError, conint
-
-
-
+from pydantic import BaseModel, EmailStr, conint, ValidationError
 
 class PostBase(BaseModel):
     title: str
     content: str
     published: bool = True
+
+try:
+    PostBase(x=1)
+except ValidationError as exc:
+    print(repr(exc.errors()[0]['type']))
+    #> 'string_type'
 
 
 class PostCreate(PostBase):
@@ -25,7 +24,7 @@ class UserOut(BaseModel):
     created_at: datetime
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class Post(PostBase):
@@ -35,7 +34,7 @@ class Post(PostBase):
     user: UserOut
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class PostOut(BaseModel):
@@ -43,7 +42,11 @@ class PostOut(BaseModel):
     votes: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
+
+
+# Exclude validate method
+PostOut.__annotations__ = {'Post': Post, 'votes': int}
 
 
 class UserCreate(BaseModel):
@@ -51,14 +54,15 @@ class UserCreate(BaseModel):
     password: str
 
 
-
 class UserLogin(BaseModel):
     email: EmailStr
     password: str
 
+
 class Token(BaseModel):
     access_token: str
     token_type: str
+
 
 class TokenData(BaseModel):
     id: Optional[str] = None
