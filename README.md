@@ -27,7 +27,7 @@ To embark on this journey and experience the marvels of our FastAPI Social App, 
 4. Witness your creation come to life!
 
 ## How to Use It
-Ready to explore? [Click here](https://fastapi-lilibeth.herokuapp.com/) to access our home page. Once there, you can unleash the possibilities of our FastAPI Social App by clicking on 'Explore the API documentation & start executing them here.'
+Ready to explore? [Social Media App](https://fastapi-lilibeth-heroku-22-f8b82f795549.herokuapp.com/)<!--{:target="_blank"}--> to access our home page. Once there, you can unleash the possibilities of our FastAPI Social App by clicking on 'Explore the API documentation & start executing them here.'
 
 Here's how you can get started:
 
