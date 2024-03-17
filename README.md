@@ -1,4 +1,4 @@
-# Welcome to the FastAPI Social App Project!
+# 🚀🐍🌟 Social Media App Project 🌟🐍🚀
 
 ## Overview
 Welcome to the exciting world of our FastAPI-based social app, a hub of Python-powered API development. This repository houses a compact yet robust social media application. Designed with innovation in mind, the app's core functionality revolves around creating, refining, and removing posts, user management, authentication, and empowering users to cast their votes on engaging posts.
